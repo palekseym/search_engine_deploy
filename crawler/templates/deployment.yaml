@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "crawler.fullname" . }}
+  labels:
+    app: crawler
+    component: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+      component: crawler
+  template:
+    metadata:
+      name: crawler
+      labels:
+        app: crawler
+        component: crawler
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: crawler
+        env:
+          - name: RMQ_HOST
+            value: rabbitmq
+          - name: MONGO
+            value: mongodb

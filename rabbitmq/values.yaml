@@ -1,0 +1,4 @@
+---
+image:
+  repository: alexeydoc/search_engine_rabbitmq
+  tag: master

@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "ui.fullname" . }}
+  labels:
+    app: crawler
+    component: ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+      component: ui
+  template:
+    metadata:
+      name: ui
+      labels:
+        app: crawler
+        component: ui
+    spec:
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: ui
+        env:
+          - name: MONGO
+            value: mongodb
