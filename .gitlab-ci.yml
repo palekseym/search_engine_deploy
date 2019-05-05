@@ -9,6 +9,7 @@ production:
     - docker:dind
   script:
     - install_helm
+    - helm version --client
     - helm dep build release
     - helm upgrade --install release --name crawler
 
