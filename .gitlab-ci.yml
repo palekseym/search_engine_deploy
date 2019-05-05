@@ -1,0 +1,24 @@
+image: alpine:latest
+
+stages:
+  - production
+
+production:
+  stage: production
+
+  script:
+    - install_helm
+    - helm dep build release
+    - helm upgrade --install --wait crawler release
+
+.helper_functions: &helper_functions |
+
+  function install_helm() {
+  apk add -U openssl curl tar gzip bash ca-certificates git
+  curl https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz | tar zx
+  mv linux-amd64/helm /usr/bin/
+  helm init --client-only
+  }
+
+before_script:
+  - *helper_functions
