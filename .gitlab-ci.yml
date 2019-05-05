@@ -13,6 +13,8 @@ production:
     - helm upgrade --install release --name crawler
 
 .helper_functions: &helper_functions |
+  export CI_REGISTRY="index.docker.io"
+  export CI_APPLICATION_REPOSITORY=$CI_REGISTRY/$CI_PROJECT_PATH
   function install_helm() {
   apk add -U openssl curl tar gzip bash ca-certificates git
   curl https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz | tar zx
