@@ -9,7 +9,7 @@ production:
   script:
     - install_helm
     - helm dep build release
-    - helm upgrade --install release --name crawler
+    - helm upgrade --install --wait crawler release
 
 .helper_functions: &helper_functions |
 
