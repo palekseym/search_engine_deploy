@@ -1,7 +1,20 @@
 image: alpine:latest
 
 stages:
+  - staging
   - production
+
+staging:
+  stage: staging
+  
+  script:
+    - install_helm
+    - helm dep build release
+    - helm upgrade --install --wait \
+      --namespace="$KUBE_NAMESPACE"
+      crawler release  
+  variables:
+    KUBE_NAMESPACE: staging
 
 production:
   stage: production
@@ -9,8 +22,13 @@ production:
   script:
     - install_helm
     - helm dep build release
-    - helm upgrade --install --wait crawler release
+    - helm upgrade --install --wait \
+      --namespace="$KUBE_NAMESPACE"
+      crawler release
+  variables:
+    KUBE_NAMESPACE: production
 
+  when: manual
 .helper_functions: &helper_functions |
 
   function install_helm() {
