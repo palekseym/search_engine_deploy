@@ -1,4 +1,4 @@
 ---
 image:
   repository: alexeydoc/search_engine_ui
-  tag: master
+  tag: 0.1.0
