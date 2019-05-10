@@ -24,8 +24,8 @@ production:
     - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" "crawler-stage" release
   variables:
     KUBE_NAMESPACE: production
-
   when: manual
+
 .helper_functions: &helper_functions |
 
   function install_helm() {
