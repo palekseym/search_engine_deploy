@@ -18,11 +18,10 @@ production:
   stage: production
 
   script:
+    - echo "deploy to $KUBE_NAMESPACE"
     - install_helm
     - helm dep build release
-    - helm upgrade --install --wait
-      --namespace="$KUBE_NAMESPACE"
-      crawler release
+    - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" crawler release
   variables:
     KUBE_NAMESPACE: production
 
