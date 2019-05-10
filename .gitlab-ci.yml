@@ -10,7 +10,7 @@ staging:
   script:
     - install_helm
     - helm dep build release
-    - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" "crawler" release  
+    - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" "crawler-prod" release  
   variables:
     KUBE_NAMESPACE: staging
 
@@ -21,7 +21,7 @@ production:
     - echo "deploy to $KUBE_NAMESPACE"
     - install_helm
     - helm dep build release
-    - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" crawler release
+    - helm upgrade --install --wait --namespace="$KUBE_NAMESPACE" "crawler-stage" release
   variables:
     KUBE_NAMESPACE: production
 
